@@ -32,54 +32,54 @@
 - (instancetype)initWithItems:(NSArray *)items {
     self = [super initWithItems:items];
     if (self) {
-
+        
         self.indicatorHeight = 3;
         self.selectedSegmentIndex = 0;
         self.apportionsSegmentWidthsByContent = YES;
-
+        
         // Create indicator
         self.indicator = [UIImageView new];
         self.indicator.backgroundColor = self.tintColor;
         self.indicator.autoresizingMask = UIViewAutoresizingNone;
         [self addSubview:self.indicator];
-
+        
         // Custimize segmented control
         id titleAttr = @{
-            NSForegroundColorAttributeName : [self.tintColor colorWithAlphaComponent:0.8],
-            NSFontAttributeName : [UIFont boldSystemFontOfSize:14]
-        };
+                         NSForegroundColorAttributeName : [self.tintColor colorWithAlphaComponent:0.8],
+                         NSFontAttributeName : [UIFont boldSystemFontOfSize:14]
+                         };
         [self setTitleTextAttributes:titleAttr forState:UIControlStateNormal];
-
+        
         id selectedTittleAttr = @{
-            NSForegroundColorAttributeName : self.tintColor,
-            NSFontAttributeName : [UIFont boldSystemFontOfSize:14]
-        };
+                                  NSForegroundColorAttributeName : self.tintColor,
+                                  NSFontAttributeName : [UIFont boldSystemFontOfSize:14]
+                                  };
         [self setTitleTextAttributes:selectedTittleAttr forState:UIControlStateSelected];
-
+        
         // Disable tint color and divider image
         [self setTintColor:[UIColor clearColor]];
         [self setDividerImage:[UIImage new]
-            forLeftSegmentState:UIControlStateNormal
-              rightSegmentState:UIControlStateNormal
-                     barMetrics:UIBarMetricsDefault];
-
+          forLeftSegmentState:UIControlStateNormal
+            rightSegmentState:UIControlStateNormal
+                   barMetrics:UIBarMetricsDefault];
+        
         // Fix indicator frame
         if (items) {
             self.indicatorMinX = [self getMinXForSegmentAtIndex:self.selectedSegmentIndex];
             self.indicatorWidth = [self getWidthForSegmentAtIndex:self.selectedSegmentIndex];
             [self updateIndicatorWithAnimation:NO];
         }
-
+        
         [self addTarget:self
-                      action:@selector(segmentedTapped:)
-            forControlEvents:UIControlEventValueChanged];
+                 action:@selector(segmentedTapped:)
+       forControlEvents:UIControlEventValueChanged];
     }
     return self;
 }
 
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
-
+    
     // Add extra width to each segment and calculate the segment width
     CGFloat totalWidth = 0;
     for (UIView *segment in self.segments) {
@@ -91,16 +91,16 @@
         segment.frame = segmentRect;
         totalWidth += segmentRect.size.width;
     }
-
+    
     _tabExtraWidth = 0;
-
+    
     // Set the width of UISegmentedControl to fit all segments
     rect.size.width = totalWidth;
     self.frame = rect;
-
+    
     // Change images tint
     [self syncImageTintColor];
-
+    
     // Sync indicator
     dispatch_async(dispatch_get_main_queue(), ^{
         self.indicatorMinX = [self getMinXForSegmentAtIndex:self.selectedSegmentIndex];
@@ -117,13 +117,13 @@
 
 - (void)setTabExtraWidth:(CGFloat)tabExtraWidth {
     _tabExtraWidth = tabExtraWidth;
-
+    
     [self setNeedsDisplay];
 }
 
 - (void)setTitleTextAttributes:(NSDictionary *)attributes forState:(UIControlState)state {
     [super setTitleTextAttributes:attributes forState:state];
-
+    
     if (state == UIControlStateNormal) {
         [self setImageNormalColor:attributes[NSForegroundColorAttributeName]];
     } else if (state == UIControlStateSelected) {
@@ -146,14 +146,27 @@
     [self syncImageTintColor];
 }
 
+- (void)setBgNormalColor:(UIColor *)normalColor {
+    _bgNormalColor = normalColor;
+    [self syncImageTintColor];
+}
+
+- (void)setBgSelectedColor:(UIColor *)selectedColor {
+    _bgSelectedColor = selectedColor;
+    [self syncImageTintColor];
+}
+
 - (void)syncImageTintColor {
     for (UIView *segment in self.segments) {
         for (UIView *subView in segment.subviews) {
             if ([subView isKindOfClass:[UIImageView class]]) {
                 if ([self.segments indexOfObject:segment] == self.selectedSegmentIndex) {
                     subView.tintColor = _imageSelectedColor;
+                    subView.backgroundColor = _bgSelectedColor;
+                    
                 } else {
                     subView.tintColor = _imageNormalColor;
+                    subView.backgroundColor = _bgNormalColor;
                 }
             }
         }
@@ -199,11 +212,11 @@
 
 - (void)updateIndicatorWithAnimation:(BOOL)animation {
     CGFloat indicatorY = 0;
-
+    
     if (self.indicatorPosition == IndicatorPositionBottom) {
         indicatorY = CGRectGetHeight(self.frame) - self.indicatorHeight;
     }
-
+    
     [UIView animateWithDuration:animation ? 0.3 : 0
                      animations:^{
                          CGRect rect = self.indicator.frame;

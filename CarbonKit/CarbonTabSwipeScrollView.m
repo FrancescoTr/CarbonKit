@@ -39,7 +39,7 @@
     if (self) {
         // Disable scroll indicators
         self.showsHorizontalScrollIndicator = self.showsVerticalScrollIndicator = NO;
-
+        
         if (@available(iOS 11.0, *)) {
             [self setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
         }
@@ -51,7 +51,7 @@
     for (UIView *view in self.subviews) {
         [view removeFromSuperview];
     }
-
+    
     // Create Carbon segmented control
     _carbonSegmentedControl = [[CarbonTabSwipeSegmentedControl alloc] initWithItems:items];
     [self addSubview:_carbonSegmentedControl];
@@ -59,19 +59,28 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-
+    
     if (self.superview != nil)
         [self.superview bringSubviewToFront:self];
-
+    
     if (_carbonSegmentedControl) {
         // Set segmented control height equal to scroll view height
         CGRect segmentRect = _carbonSegmentedControl.frame;
         segmentRect.size.height = CGRectGetHeight(self.frame);
+        
+        if (_padding > 0) {
+            segmentRect.origin.y += _padding;
+            segmentRect.size.height = CGRectGetHeight(self.frame) - 2 * _padding;
+            
+            segmentRect.origin.x += _padding;
+            //segmentRect.size.width = CGRectGetWidth(self.frame) - 2 * _padding;
+        }
+        
         _carbonSegmentedControl.frame = segmentRect;
-
+        
         // Min content width equal to scroll view width
         CGFloat contentWidth = MAX(CGRectGetWidth(segmentRect), CGRectGetWidth(self.frame) + 1);
-
+        
         // Scroll view content size
         self.contentSize = CGSizeMake(contentWidth, CGRectGetHeight(self.frame));
     }

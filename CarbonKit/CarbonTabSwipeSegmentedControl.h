@@ -47,6 +47,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic) CGFloat tabExtraWidth;
 @property(nonatomic, strong, nullable) UIColor *imageNormalColor;
 @property(nonatomic, strong, nullable) UIColor *imageSelectedColor;
+
+@property(nonatomic, strong, nullable) UIColor *bgNormalColor;
+@property(nonatomic, strong, nullable) UIColor *bgSelectedColor;
+
 @property(nonatomic, strong, nonnull) UIImageView *indicator;
 @property(nonatomic, weak, readonly) NSArray<UIView *> *segments;
 
