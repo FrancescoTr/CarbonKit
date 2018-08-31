@@ -71,8 +71,8 @@
         
         if (_padding > 0) {
             
-            NSLog(@"segmentRect.origin.y = %f", segmentRect.origin.y);
-            NSLog(@"segmentRect.origin.x = %f", segmentRect.origin.x);
+            //NSLog(@"segmentRect.origin.y = %f", segmentRect.origin.y);
+            //NSLog(@"segmentRect.origin.x = %f", segmentRect.origin.x);
             if(segmentRect.origin.y == 0) {
                 segmentRect.origin.y = _padding;
                 //segmentRect.size.height = CGRectGetHeight(self.frame) - 2 * _padding;
