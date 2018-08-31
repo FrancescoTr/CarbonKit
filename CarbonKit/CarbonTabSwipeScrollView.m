@@ -68,12 +68,18 @@
         CGRect segmentRect = _carbonSegmentedControl.frame;
         segmentRect.size.height = CGRectGetHeight(self.frame);
         
+        
         if (_padding > 0) {
-            segmentRect.origin.y += _padding;
-            segmentRect.size.height = CGRectGetHeight(self.frame) - 2 * _padding;
             
-            segmentRect.origin.x += _padding;
-            //segmentRect.size.width = CGRectGetWidth(self.frame) - 2 * _padding;
+            NSLog(@"segmentRect.origin.y = %f", segmentRect.origin.y);
+            NSLog(@"segmentRect.origin.x = %f", segmentRect.origin.x);
+            if(segmentRect.origin.y == 0) {
+                segmentRect.origin.y = _padding;
+                //segmentRect.size.height = CGRectGetHeight(self.frame) - 2 * _padding;
+                segmentRect.origin.x = _padding;
+            }
+            
+            segmentRect.size.height = CGRectGetHeight(self.frame) - 2 * _padding;
         }
         
         _carbonSegmentedControl.frame = segmentRect;
