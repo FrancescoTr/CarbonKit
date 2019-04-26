@@ -67,7 +67,7 @@
         // Set segmented control height equal to scroll view height
         CGRect segmentRect = self.frame;
         segmentRect.size.width = _carbonSegmentedControl.frame.size.width;
-       // segmentRect.size.height = CGRectGetHeight(self.frame);
+        // segmentRect.size.height = CGRectGetHeight(self.frame);
         
         CGRect adjustedRect = segmentRect;
         if (_padding > 0) {
@@ -79,13 +79,13 @@
             adjustedRect.origin.x = _padding;
             adjustedRect.origin.y = _padding;
             
-            if(self.frame.size.height == segmentRect.size.height) {
-              
+//            if(self.frame.size.height == segmentRect.size.height) {
+            
                 adjustedRect.size.height = CGRectGetHeight(self.frame) - 2 * _padding;
                 
-//                const UIEdgeInsets insets = UIEdgeInsetsMake(_padding, _padding, -_padding, -_padding);
-//                adjustedRect = UIEdgeInsetsInsetRect(segmentRect, insets);
-            }
+                //                const UIEdgeInsets insets = UIEdgeInsetsMake(_padding, _padding, -_padding, -_padding);
+                //                adjustedRect = UIEdgeInsetsInsetRect(segmentRect, insets);
+//            }
             
             //segmentRect.size.height = CGRectGetHeight(self.frame) - 2 * _padding;
             
@@ -101,7 +101,8 @@
         CGFloat contentWidth = MAX(CGRectGetWidth(adjustedRect), CGRectGetWidth(self.frame) + 1);
         
         // Scroll view content size
-        self.contentSize = CGSizeMake(contentWidth, CGRectGetHeight(adjustedRect));
+        self.contentSize = CGSizeMake(contentWidth, self.frame.size.height);
+        //self.contentInset = UIEdgeInsetsMake(_padding, 0, -_padding, 0);_padding;
     }
 }
 
