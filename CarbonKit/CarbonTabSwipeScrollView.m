@@ -65,8 +65,9 @@
     
     if (_carbonSegmentedControl) {
         // Set segmented control height equal to scroll view height
-        CGRect segmentRect = _carbonSegmentedControl.frame;
-        segmentRect.size.height = CGRectGetHeight(self.frame) - 2 * _padding;
+        CGRect segmentRect = self.frame;
+        segmentRect.size.width = _carbonSegmentedControl.frame.size.width;
+       // segmentRect.size.height = CGRectGetHeight(self.frame);
         
         CGRect adjustedRect = segmentRect;
         if (_padding > 0) {
@@ -74,12 +75,16 @@
             //            NSLog(@"segmentRect.origin.x = %f", segmentRect.origin.x);
             //            NSLog(@"segmentRect.origin.y = %f", segmentRect.origin.y);
             //            NSLog(@"segmentRect.height = %f", segmentRect.size.height);
-            if(segmentRect.origin.y == 0) {
-                //                segmentRect.origin.y = _padding;
-                //segmentRect.size.height = CGRectGetHeight(self.frame) - 2 * _padding;
-                //                segmentRect.origin.x = _padding;
-                const UIEdgeInsets insets = UIEdgeInsetsMake(0, _padding, 0, -_padding);
-                adjustedRect = UIEdgeInsetsInsetRect(segmentRect, insets);
+            
+            adjustedRect.origin.x = _padding;
+            adjustedRect.origin.y = _padding;
+            
+            if(self.frame.size.height == segmentRect.size.height) {
+              
+                adjustedRect.size.height = CGRectGetHeight(self.frame) - 2 * _padding;
+                
+//                const UIEdgeInsets insets = UIEdgeInsetsMake(_padding, _padding, -_padding, -_padding);
+//                adjustedRect = UIEdgeInsetsInsetRect(segmentRect, insets);
             }
             
             //segmentRect.size.height = CGRectGetHeight(self.frame) - 2 * _padding;
