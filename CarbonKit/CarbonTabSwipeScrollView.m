@@ -61,35 +61,44 @@
     [super layoutSubviews];
     
     if (self.superview != nil)
-        [self.superview bringSubviewToFront:self];
+    [self.superview bringSubviewToFront:self];
     
     if (_carbonSegmentedControl) {
         // Set segmented control height equal to scroll view height
         CGRect segmentRect = _carbonSegmentedControl.frame;
         segmentRect.size.height = CGRectGetHeight(self.frame);
         
-        
+        CGRect adjustedRect = segmentRect;
         if (_padding > 0) {
             
-            //NSLog(@"segmentRect.origin.y = %f", segmentRect.origin.y);
-            //NSLog(@"segmentRect.origin.x = %f", segmentRect.origin.x);
+            //            NSLog(@"segmentRect.origin.x = %f", segmentRect.origin.x);
+            //            NSLog(@"segmentRect.origin.y = %f", segmentRect.origin.y);
+            //            NSLog(@"segmentRect.height = %f", segmentRect.size.height);
             if(segmentRect.origin.y == 0) {
-                segmentRect.origin.y = _padding;
+                //                segmentRect.origin.y = _padding;
                 //segmentRect.size.height = CGRectGetHeight(self.frame) - 2 * _padding;
-                segmentRect.origin.x = _padding;
+                //                segmentRect.origin.x = _padding;
+                const UIEdgeInsets insets = UIEdgeInsetsMake(_padding, _padding, -_padding, -_padding);
+                adjustedRect = UIEdgeInsetsInsetRect(segmentRect, insets);
             }
             
-            segmentRect.size.height = CGRectGetHeight(self.frame) - 2 * _padding;
+            //segmentRect.size.height = CGRectGetHeight(self.frame) - 2 * _padding;
+            
+            //            NSLog(@"adjustedRect.origin.x = %f", adjustedRect.origin.x);
+            //            NSLog(@"adjustedRect.origin.y = %f", adjustedRect.origin.y);
+            //            NSLog(@"adjustedRect.height = %f", adjustedRect.size.height);
         }
         
-        _carbonSegmentedControl.frame = segmentRect;
+        // update frame
+        _carbonSegmentedControl.frame = adjustedRect;
         
         // Min content width equal to scroll view width
-        CGFloat contentWidth = MAX(CGRectGetWidth(segmentRect), CGRectGetWidth(self.frame) + 1);
+        CGFloat contentWidth = MAX(CGRectGetWidth(adjustedRect), CGRectGetWidth(self.frame) + 1);
         
         // Scroll view content size
-        self.contentSize = CGSizeMake(contentWidth, CGRectGetHeight(self.frame));
+        self.contentSize = CGSizeMake(contentWidth, CGRectGetHeight(adjustedRect));
     }
 }
+
 
 @end
