@@ -59,10 +59,18 @@
         // Disable tint color and divider image
         [self setTintColor:[UIColor clearColor]];
         [self setDividerImage:[UIImage new]
-          forLeftSegmentState:UIControlStateNormal
-            rightSegmentState:UIControlStateNormal
-                   barMetrics:UIBarMetricsDefault];
-        
+            forLeftSegmentState:UIControlStateNormal
+              rightSegmentState:UIControlStateNormal
+                     barMetrics:UIBarMetricsDefault];
+
+        [self setClipsToBounds:FALSE];
+        [self setBackgroundImage:[UIImage new]
+                        forState:UIControlStateNormal
+                      barMetrics:UIBarMetricsDefault];
+        [self setBackgroundImage:[UIImage new]
+                        forState:UIControlStateSelected
+                      barMetrics:UIBarMetricsDefault];
+
         // Fix indicator frame
         if (items) {
             self.indicatorMinX = [self getMinXForSegmentAtIndex:self.selectedSegmentIndex];
