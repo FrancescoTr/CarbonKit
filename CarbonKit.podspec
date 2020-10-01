@@ -15,13 +15,13 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = "CarbonKit"
+  s.name         = "OLECarbonKit"
   s.version      = "2.3.1"
   s.summary      = "CarbonKit - iOS Components (Obj-C & Swift)"
 
   s.description  = "CarbonKit is an open source iOS library that includes powerful and beauty UI components."
 
-  s.homepage     = "https://github.com/ermalkaleci/CarbonKit#readme"
+  s.homepage     = "https://github.com/SonNguyen177"
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -43,8 +43,8 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "Ermal Kaleci" => "ermalkaleci@gmail.com" }
-  s.social_media_url   = "https://twitter.com/KaleciErmal"
+  s.author             = { "Son Nguyen" => "nguyenhoaisonfat@gmail.com" }
+  s.social_media_url   = "https://github.com/SonNguyen177"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -66,7 +66,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/ermalkaleci/CarbonKit.git", :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/SonNguyen177/CarbonKit.git", :tag => s.version.to_s }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
