@@ -14,7 +14,7 @@ CarbonKit includes:
 # Carthage
 Add following line into your Cartfile
 ```
-github "ermalkaleci/CarbonKit"
+github "sonnguyen177/CarbonKit"
 ```
 
 Run `carthage update`
@@ -23,7 +23,7 @@ Run `carthage update`
 CarbonKit is available on CocoaPods. Add to your Podfile:
 ```
 use_frameworks!
-pod 'CarbonKit'
+pod 'OLECarbonKit'
 ```
 Run `pod install`
 
