@@ -15,8 +15,8 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = "OLECarbonKit"
-  s.version      = "2.3.1"
+  s.name         = "CarbonKit"
+  s.version      = "3.0"
   s.summary      = "CarbonKit - iOS Components (Obj-C & Swift)"
 
   s.description  = "CarbonKit is an open source iOS library that includes powerful and beauty UI components."
