@@ -53,6 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong, nonnull) UIImageView *indicator;
 @property(nonatomic, weak, readonly) NSArray<UIView *> *segments;
+@property(nonatomic) CGFloat padding;
 
 - (instancetype)initWithItems:(nullable NSArray *)items;
 

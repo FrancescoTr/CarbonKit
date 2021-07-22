@@ -71,6 +71,7 @@
         
         CGRect adjustedRect = segmentRect;
         if (_padding > 0) {
+            _carbonSegmentedControl.padding = _padding;
             
             //            NSLog(@"segmentRect.origin.x = %f", segmentRect.origin.x);
             //            NSLog(@"segmentRect.origin.y = %f", segmentRect.origin.y);
@@ -99,6 +100,7 @@
         
         // Min content width equal to scroll view width
         CGFloat contentWidth = MAX(CGRectGetWidth(adjustedRect), CGRectGetWidth(self.frame) + 1);
+        contentWidth += (2 *_padding);
         
         // Scroll view content size
         self.contentSize = CGSizeMake(contentWidth, self.frame.size.height);

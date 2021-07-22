@@ -94,10 +94,19 @@
         NSInteger index = [self.segments indexOfObject:segment];
         CGFloat width = [self getWidthForSegmentAtIndex:index];
         CGRect segmentRect = segment.frame;
+        
+        if (index == 0) {
+            totalWidth = _padding;
+        }
+        
         segmentRect.origin.x = totalWidth;
         segmentRect.size.width = width + _tabExtraWidth;
         segment.frame = segmentRect;
         totalWidth += segmentRect.size.width;
+        
+        if (index == [self.segments count] - 1) {
+            totalWidth += _padding;
+        }
     }
     
     _tabExtraWidth = 0;
@@ -105,6 +114,7 @@
     // Set the width of UISegmentedControl to fit all segments
     rect.size.width = totalWidth;
     self.frame = rect;
+    
     
     // Change images tint
     [self syncImageTintColor];
@@ -197,7 +207,7 @@
 
 - (CGFloat)getWidthForSegmentAtIndex:(NSUInteger)index {
     if (![self isRTL] && index == [self.segments count] - 1) {
-        return CGRectGetWidth(self.frame) - CGRectGetMinX(self.segments[index].frame);
+        return CGRectGetWidth(self.frame) - CGRectGetMinX(self.segments[index].frame) - _padding;
     }
     return CGRectGetWidth(self.segments[index].frame);
 }
@@ -220,10 +230,19 @@
 
 - (void)updateIndicatorWithAnimation:(BOOL)animation {
     CGFloat indicatorY = 0;
+//    CGRect oldFrame = self.frame;
+//    NSLog(@"updateIndicatorWithAnimation.padding = %f", _padding);
+//    NSLog(@"updateIndicatorWithAnimation.x = %f", oldFrame.origin.x);
+//    NSLog(@"updateIndicatorWithAnimation.y = %f", oldFrame.origin.y);
+//    NSLog(@"updateIndicatorWithAnimation.w = %f", oldFrame.size.width);
+//    NSLog(@"updateIndicatorWithAnimation.h = %f", oldFrame.size.height);
     
     if (self.indicatorPosition == IndicatorPositionBottom) {
         indicatorY = CGRectGetHeight(self.frame) - self.indicatorHeight;
     }
+    
+//    NSLog(@"updateIndicatorWithAnimation.indicatorX = %f", self.indicatorMinX + _padding);
+//    NSLog(@"updateIndicatorWithAnimation.indicatorY = %f", indicatorY);
     
     [UIView animateWithDuration:animation ? 0.3 : 0
                      animations:^{
