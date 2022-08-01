@@ -193,7 +193,7 @@
 
     [self.pageViewController setViewControllers:@[ viewController ]
                                       direction:animateDirection
-                                       animated:animate
+                                       animated:![self.pageViewController.childViewControllers containsObject:viewController]
                                      completion:animateCompletionBlock];
 }
 
