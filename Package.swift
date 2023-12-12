@@ -20,7 +20,10 @@ let package = Package(
         .target(
             name: "CarbonKit",
             dependencies: [],
-            path: "CarbonKit/",
-            publicHeadersPath: "CarbonKit/")
+            path: "CarbonKit",
+            publicHeadersPath: "CarbonKit"),
+            cSettings: [
+                .headerSearchPath("../")
+            ]
     ]
 )
