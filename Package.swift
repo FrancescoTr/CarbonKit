@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.7
 import PackageDescription
 
 let package = Package(
@@ -21,9 +21,7 @@ let package = Package(
             name: "CarbonKit",
             dependencies: [],
             path: "CarbonKit",
-            publicHeadersPath: "CarbonKit"),
-            cSettings: [
-                .headerSearchPath("../")
-            ]
+            publicHeadersPath: "./"
+        )
     ]
 )
