@@ -20,10 +20,7 @@ let package = Package(
         .target(
             name: "CarbonKit",
             dependencies: [],
-            path: "CarbonKit",
-            publicHeadersPath: "CarbonKit"),
-        .testTarget(
-            name: "CarbonKitTests",
-            dependencies: ["CarbonKit"])
+            path: "CarbonKit/",
+            publicHeadersPath: "CarbonKit/")
     ]
 )
